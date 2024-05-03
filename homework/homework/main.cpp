@@ -19,9 +19,11 @@ void test_String_class() {
   s3.set("abcd");
   s1.set(s3);
   s1.insert(2, "123");
-  cout<<s1.get()<<endl;
+  cout << "s1: " << s1.get() << ", s1.length():" << s1.length() << endl;
   s2.insert(3, s3);
   s3.insert(0, "123");
+  cout << "s1: " << s1.get() << ", s1.length():" << s1.length() << endl;
+
 
   cout << "s1.empty(): " << (s1.empty() ? "true" : "false") << endl;
   cout << "s1: " << s1.get() << ", s1.length():" << s1.length() << endl;
@@ -29,44 +31,44 @@ void test_String_class() {
   cout << "s3: " << s3.get() << ", s3.size(): " << s3.size() << endl;
   cout << endl;
 
-  s1.erase(2, 3);
-  s2.erase(3, s3.length());
-  s3.erase(0, 3);
+  // s1.erase(2, 3);
+  // s2.erase(3, s3.length());
+  // s3.erase(0, 3);
 
-  cout << "s1: " << s1.get() << ", s1.length():" << s1.length() << endl;
-  cout << "s2: " << s2.get() << ", s2.size(): " << s2.size() << endl;
-  cout << "s3: " << s3.get() << ", s3.size(): " << s3.size() << endl;
-  cout << endl;
+  // cout << "s1: " << s1.get() << ", s1.length():" << s1.length() << endl;
+  // cout << "s2: " << s2.get() << ", s2.size(): " << s2.size() << endl;
+  // cout << "s3: " << s3.get() << ", s3.size(): " << s3.size() << endl;
+  // cout << endl;
 
-  s1.replace(0, 2, "AB");
-  s2.replace(0, 1, s1);
-  s3.replace(2, 2, s2);
+  // s1.replace(0, 2, "AB");
+  // s2.replace(0, 1, s1);
+  // s3.replace(2, 2, s2);
 
-  cout << "s1: " << s1.get() << ", s1.length():" << s1.length() << endl;
-  cout << "s2: " << s2.get() << ", s2.size(): " << s2.size() << endl;
-  cout << "s3: " << s3.get() << ", s3.size(): " << s3.size() << endl;
-  cout << endl;
+  // cout << "s1: " << s1.get() << ", s1.length():" << s1.length() << endl;
+  // cout << "s2: " << s2.get() << ", s2.size(): " << s2.size() << endl;
+  // cout << "s3: " << s3.get() << ", s3.size(): " << s3.size() << endl;
+  // cout << endl;
 
-  s1.set("aabbccaabbcc");
-  unsigned pos = s1.find("bb");
-  cout << "s1: " << s1.get() << ", s1.find(\"bb\"): " << pos << endl;
-  cout << endl;
+  // s1.set("aabbccaabbcc");
+  // unsigned pos = s1.find("bb");
+  // cout << "s1: " << s1.get() << ", s1.find(\"bb\"): " << pos << endl;
+  // cout << endl;
 
-  unsigned pos2 = s1.find("bb", pos + 1);
-  cout << "s1: " << s1.get() << ", s1.find(\"bb\", pos + 1): " << pos2 << endl;
-  cout << endl;
+  // unsigned pos2 = s1.find("bb", pos + 1);
+  // cout << "s1: " << s1.get() << ", s1.find(\"bb\", pos + 1): " << pos2 << endl;
+  // cout << endl;
 
-  s2.set("caa");
-  pos = s1.find(s2);
-  cout << "s1: " << s1.get() << ", s2: " << s2.get() << ", s1.find(s2): " << pos
-       << endl;
-  cout << endl;
+  // s2.set("caa");
+  // pos = s1.find(s2);
+  // cout << "s1: " << s1.get() << ", s2: " << s2.get() << ", s1.find(s2): " << pos
+  //      << endl;
+  // cout << endl;
 
-  pos2 = s1.find(s2, pos + 1);
-  cout << "s1: " << s1.get() << ", s2: " << s2.get()
-       << ", s1.find(s2, pos + 1): "
-       << (pos2 == String::npos ? "not found" : "found") << endl;
-  cout << endl;
+  // pos2 = s1.find(s2, pos + 1);
+  // cout << "s1: " << s1.get() << ", s2: " << s2.get()
+  //      << ", s1.find(s2, pos + 1): "
+  //      << (pos2 == String::npos ? "not found" : "found") << endl;
+  // cout << endl;
 }
 
 template <class T>

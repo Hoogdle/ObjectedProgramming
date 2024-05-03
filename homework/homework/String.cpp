@@ -85,10 +85,19 @@
   }
 
   void String::insert(unsigned position, const String &str){
-      char *temp = memory + position;
-      strncpy(memory,memory,position);
-      strcat(memory,str.memory);
-      strcat(memory,temp);
+    char* temp = memory+position;
+    char* str1 = (char*)malloc(sizeof(char)*capacity);
+    char* str2 = (char*)malloc(sizeof(char)*capacity);
+    char* str3 = (char*)malloc(sizeof(char)*capacity);
+    strncpy(str1,memory,position);
+    strcpy(str2,str.memory);
+    strcpy(str3,temp);
+    strcat(str1,str2);
+    strcat(str1,str3);
+    strcpy(memory,str1);
+    free(str1);
+    free(str2);
+    free(str3);
   }
   
   // memory에 저장된 문자열의 position 위치부터 길이가 length인 문자열을 삭제
