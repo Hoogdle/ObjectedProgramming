@@ -52,7 +52,7 @@
 
   // length(), size() 모두 문자열의 길이를 반환
   unsigned String::length() const{
-    return this->capacity;
+    return strlen(memory);
   }
   unsigned String::size() const{
     return this->capacity;
