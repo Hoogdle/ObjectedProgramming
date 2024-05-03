@@ -74,14 +74,16 @@
   }
 
   void String::insert(unsigned position, const String &str){
-      char *temp = str.memory + position;
+      char *temp = memory + position;
       strncpy(memory,memory,position);
-      strcat(memory,str);
+      strcat(memory,str.memory);
       strcat(memory,temp);
   }
   
   // memory에 저장된 문자열의 position 위치부터 길이가 length인 문자열을 삭제
-  void erase(unsigned position, unsigned length);
+  void String::erase(unsigned position, unsigned length){
+    
+  }
   
   // memory에 저장된 문자열의 position 위치부터 길이가 length인 문자열을 str로 치환
   void replace(unsigned position, unsigned length, const char *str);
