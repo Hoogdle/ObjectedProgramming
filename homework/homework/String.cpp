@@ -58,10 +58,9 @@
 
   // 위치(인덱스)가 position인 위치부터 길이가 length인 부분 문자열을 String 객체로 리턴
   String String::substr(unsigned position, unsigned length) const{
-      String temp;
       char *addr = memory+position;
-      temp.capacity = length;
-      strncpy(temp.memory,addr,length);
+      strncpy(addr,addr,length);
+      String temp = addr;
       return temp;
   }
   
@@ -82,16 +81,35 @@
   
   // memory에 저장된 문자열의 position 위치부터 길이가 length인 문자열을 삭제
   void String::erase(unsigned position, unsigned length){
-    
+      char* temp = memory + position + length;
+      strcpy(memory+position,temp);
   }
   
   // memory에 저장된 문자열의 position 위치부터 길이가 length인 문자열을 str로 치환
-  void replace(unsigned position, unsigned length, const char *str);
-  void replace(unsigned position, unsigned length, const String &str);
+  void String::replace(unsigned position, unsigned length, const char *str){
+      erase(position,length);
+      insert(position,str);
+  }
+  void String::replace(unsigned position, unsigned length, const String &str){
+      erase(position,length);
+      insert(position,str.memory);
+  }
 
   
   // memory에 저장된 문자열의 position 위치부터 str 문자열을 찾으며,
   // position 뒤의 위치에서 가장 처음 str이 나타나는 위치의 인덱스를 반환
   // 찾지 못할 경우 npos를 리턴
-  unsigned find(const char *str, unsigned position = 0) const;    
-  unsigned find(const String &str, unsigned position = 0) const;
+  unsigned String::find(const char *str, unsigned position = 0) const{
+      char* temp = memory + position;
+      unsigned index = -1;
+      if(strstr(temp,str)==NULL){return npos;}
+      index = strstr(temp,str) - temp;
+      return index;
+  }    
+  unsigned String::find(const String &str, unsigned position = 0) const{
+      char* temp = memory + position;
+      unsigned index = -1;
+      if(strstr(temp,str.memory)==NULL){return npos;}
+      index = strstr(temp,str.memory) - temp;
+      return index;
+  }
