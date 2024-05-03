@@ -6,6 +6,8 @@
 #include <cstring>
 #include "String.h"
 
+
+  const unsigned String::npos = 65535;
   // 생성자
   String::String(){
     this->capacity = 10;
