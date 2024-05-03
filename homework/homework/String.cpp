@@ -69,10 +69,19 @@
   
   // memory의 position 위치에 str 을 삽입
   void String::insert(unsigned position, const char *str){
-      char *temp = memory + position;
-      strncpy(memory,memory,position);
-      strcat(memory,str);
-      strcat(memory,temp);
+    char* temp = memory+position;
+    char* str1 = (char*)malloc(sizeof(char)*capacity);
+    char* str2 = (char*)malloc(sizeof(char)*capacity);
+    char* str3 = (char*)malloc(sizeof(char)*capacity);
+    strncpy(str1,memory,position);
+    strcpy(str2,str);
+    strcpy(str3,temp);
+    strcat(str1,str2);
+    strcat(str1,str3);
+    strcpy(memory,str1);
+    free(str1);
+    free(str2);
+    free(str3);
   }
 
   void String::insert(unsigned position, const String &str){

@@ -19,6 +19,7 @@ void test_String_class() {
   s3.set("abcd");
   s1.set(s3);
   s1.insert(2, "123");
+  cout<<s1.get()<<endl;
   s2.insert(3, s3);
   s3.insert(0, "123");
 
