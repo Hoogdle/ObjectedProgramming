@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <stdlib.h>
+#include <stdio.h>
 #include <cstring>
 #include "String.h"
 
@@ -99,14 +100,14 @@
   // memory에 저장된 문자열의 position 위치부터 str 문자열을 찾으며,
   // position 뒤의 위치에서 가장 처음 str이 나타나는 위치의 인덱스를 반환
   // 찾지 못할 경우 npos를 리턴
-  unsigned String::find(const char *str, unsigned position = 0) const{
+  unsigned String::find(const char *str, unsigned position) const{
       char* temp = memory + position;
       unsigned index = -1;
       if(strstr(temp,str)==NULL){return npos;}
       index = strstr(temp,str) - temp;
       return index;
   }    
-  unsigned String::find(const String &str, unsigned position = 0) const{
+  unsigned String::find(const String &str, unsigned position) const{
       char* temp = memory + position;
       unsigned index = -1;
       if(strstr(temp,str.memory)==NULL){return npos;}

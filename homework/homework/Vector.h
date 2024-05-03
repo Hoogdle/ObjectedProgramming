@@ -1,6 +1,9 @@
 #ifndef VECTOR_H
 #define VECTOR_H
 
+#include <stdlib.h>
+#include <stdio.h>
+
 template <class T> class Vector {
   T *_memory;   // 동적으로 생성한 T 타입의 배열을 가리킬 포인터
   unsigned _capacity; // 동적으로 할당된 메모리의 크기
@@ -35,18 +38,17 @@ public:
     // 동적 배열의 크기를 리턴
   }
 
-  const T & Vector::at(unsigned index) const {
-    if(index>=capacity){
-      printf("over the capacity!");
-      return;
+  const T &at(unsigned index) const {
+    if(index>=0 && index<=_size){
+      return _memory[index];
     }
-    return _memory[index];
+    printf("over the capacity!");
     // 동적 배열의 index 위치에 저장된 요소를 리턴
     // 배열의 크기를 넘는 인덱스틑 고려하지 않아도 됨
   }
 
   void set(unsigned index, const T &element) {
-    if(index>=capacity){
+    if(index>=_size){
       printf("over the capacity!");
       return;
     }
@@ -56,8 +58,8 @@ public:
   }
 
   bool empty() const {
-    if(size==0){return true};
-    else {return false};
+    if(_size==0){return true;}
+    else {return false;}
     // 배열에 저장된 요소가 없을 경우 true, 그렇지 않다면 false를 리턴
   }
 
@@ -65,7 +67,7 @@ public:
     // 배열의 끝에 element를 추가
     if(_size+1==_capacity){
       _capacity *= 2;
-      _memory = (T*)realloc(_memory,sizeof(T)*capacity);
+      _memory = (T*)realloc(_memory,sizeof(T)*_capacity);
     }
     ++_size;
     _memory[_size-1] = element;
@@ -74,14 +76,13 @@ public:
   void pop_back() {
     if(empty()){return;}
     _size -= 1;
-    _memory[_size] == NULL;
     // 배열의 마지막 요소를 제거
     // 더이상 제거할 요소가 없다면 무시
   }
 
   void erase(unsigned index) {
     if(empty()){return;}
-    if(!(index>=0 && index<size)){return;}
+    if(!(index>=0 && index<_size)){return;}
     for(int i=index;i<_size;++i){_memory[i-1] = _memory[i];}
     _size -= 1;
     // index가 유효한 경우, 배열의 index 위치의 요소를 삭제
@@ -89,7 +90,7 @@ public:
   }
 
   void insert(unsigned index, const T &element) {
-    if(!(index>=0 && index<size)){return;}
+    if(!(index>=0 && index<_size)){return;}
     _size += 1;
     for(int i=_size-1;i>=index;--i){
       _memory[i] = _memory[i-1];
