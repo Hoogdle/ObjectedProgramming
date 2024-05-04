@@ -55,7 +55,7 @@
     return strlen(memory);
   }
   unsigned String::size() const{
-    return this->capacity;
+    return strlen(memory);
   }
 
 
