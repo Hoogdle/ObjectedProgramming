@@ -55,7 +55,7 @@ void test_String_class() {
   unsigned pos2 = s1.find("bb", pos + 1);
   cout << "s1: " << s1.get() << ", s1.find(\"bb\", pos + 1): " << pos2 << endl;
   cout << endl;
-
+  
 //   s2.set("caa");
 //   pos = s1.find(s2);
 //   cout << "s1: " << s1.get() << ", s2: " << s2.get() << ", s1.find(s2): " << pos
