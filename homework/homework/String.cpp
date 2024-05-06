@@ -34,10 +34,14 @@
 
   // memory의 문자열을 str로 변경
   void String::set(const char *str){
+    this->capacity = strlen(str);
+    this->memory = (char*)realloc(memory,sizeof(char)*capacity);
     strcpy(memory,str);
   }  
 
   void String::set(const String &str){
+    this->capacity = strlen(str.memory);
+    this->memory = (char*)realloc(memory,sizeof(char)*capacity);
     strcpy(memory,str.memory);
   }
 
@@ -69,22 +73,24 @@
   
   // memory의 position 위치에 str 을 삽입
   void String::insert(unsigned position, const char *str){
+    capacity = capacity + strlen(str);
+    memory = (char*)realloc(memory,sizeof(char)*capacity);
     char* temp = memory+position;
-    char* str1 = (char*)malloc(sizeof(char)*capacity);
-    char* str2 = (char*)malloc(sizeof(char)*capacity);
-    char* str3 = (char*)malloc(sizeof(char)*capacity);
+    char* str1 = (char*)calloc(capacity,sizeof(char));
+    char* str2 = (char*)calloc(capacity,sizeof(char));
+    char* str3 = (char*)calloc(capacity,sizeof(char));
     strncpy(str1,memory,position);
     strcpy(str2,str);
     strcpy(str3,temp);
     strcat(str1,str2);
     strcat(str1,str3);
     strcpy(memory,str1);
-    free(str1);
-    free(str2);
-    free(str3);
+
   }
 
   void String::insert(unsigned position, const String &str){
+    capacity = capacity + strlen(str.memory);
+    memory = (char*)realloc(memory,sizeof(char)*capacity);
     char* temp = memory+position;
     char* str1 = (char*)malloc(sizeof(char)*capacity);
     char* str2 = (char*)malloc(sizeof(char)*capacity);
@@ -95,9 +101,6 @@
     strcat(str1,str2);
     strcat(str1,str3);
     strcpy(memory,str1);
-    free(str1);
-    free(str2);
-    free(str3);
   }
   
   // memory에 저장된 문자열의 position 위치부터 길이가 length인 문자열을 삭제
