@@ -13,13 +13,14 @@ public:
   Vector(unsigned capacity = 5) {
     this->_capacity = capacity;
     _memory = (T*)calloc(capacity,sizeof(T));
+    _size = 0;
     // _memory의 크기를 매개변수 capacity 크기로 동적으로 할당하고
     // 동적으로 할당된 배열의 요소는 없도록 초기화하는 생성자를 여기에 구현
   }
 
   Vector(unsigned size, const T &element) {
     this->_size = size;
-    this->_capacity = size;
+    this->_capacity = size*2;
     _memory = (T*)malloc(sizeof(T)*size);
     for(int i=0;i<size;++i){
       _memory[i] = element;
@@ -42,14 +43,14 @@ public:
     if(index>=0 && index<=_size){
       return _memory[index];
     }
-    printf("over the capacity!");
+    // printf("over the capacity!\n");
     // 동적 배열의 index 위치에 저장된 요소를 리턴
     // 배열의 크기를 넘는 인덱스틑 고려하지 않아도 됨
   }
 
   void set(unsigned index, const T &element) {
-    if(index>=_size){
-      printf("over the capacity!");
+    if(index>=_capacity){
+      // printf("over the capacity!\n");
       return;
     }
     _memory[index] = element;
@@ -65,7 +66,7 @@ public:
 
   void push_back(const T &element) {
     // 배열의 끝에 element를 추가
-    if(_size+1==_capacity){
+    if(_size==_capacity){
       _capacity *= 2;
       _memory = (T*)realloc(_memory,sizeof(T)*_capacity);
     }
@@ -83,7 +84,7 @@ public:
   void erase(unsigned index) {
     if(empty()){return;}
     if(!(index>=0 && index<_size)){return;}
-    for(int i=index;i<_size;++i){_memory[i-1] = _memory[i];}
+    for(int i=index;i+1<_size;++i){_memory[i] = _memory[i+1];}
     _size -= 1;
     // index가 유효한 경우, 배열의 index 위치의 요소를 삭제
     // 유효하지 않은 경우는 아무 일도 일어나지 않음

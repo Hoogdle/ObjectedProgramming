@@ -105,6 +105,9 @@
   
   // memory에 저장된 문자열의 position 위치부터 길이가 length인 문자열을 삭제
   void String::erase(unsigned position, unsigned length){
+      if(position+length>strlen(memory)){
+        length = length - (position+length-strlen(memory));
+      }
       char* temp = memory + position + length;
       strcpy(memory+position,temp);
   }
@@ -127,13 +130,13 @@
       char* temp = memory + position;
       unsigned index = -1;
       if(strstr(temp,str)==NULL){return npos;}
-      index = strstr(temp,str) - temp;
+      index = strstr(temp,str) - memory;
       return index;
   }    
   unsigned String::find(const String &str, unsigned position) const{
       char* temp = memory + position;
       unsigned index = -1;
       if(strstr(temp,str.memory)==NULL){return npos;}
-      index = strstr(temp,str.memory) - temp;
+      index = strstr(temp,str.memory) - memory;
       return index;
   }
