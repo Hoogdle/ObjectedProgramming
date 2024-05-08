@@ -84,8 +84,10 @@
     strcpy(str3,temp);
     strcat(str1,str2);
     strcat(str1,str3);
-    strcpy(memory,str1);
-
+    free(memory);
+    memory = str1;
+    free(str2);
+    free(str3);
   }
 
   void String::insert(unsigned position, const String &str){
@@ -100,7 +102,10 @@
     strcpy(str3,temp);
     strcat(str1,str2);
     strcat(str1,str3);
-    strcpy(memory,str1);
+    free(memory);
+    memory = str1;
+    free(str2);
+    free(str3);
   }
   
   // memory에 저장된 문자열의 position 위치부터 길이가 length인 문자열을 삭제
