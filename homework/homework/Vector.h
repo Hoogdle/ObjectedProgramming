@@ -21,12 +21,17 @@ public:
   Vector(unsigned size, const T &element) { // 사이즈와 element를 매개변수로 받은 경우
     this->_size = size; // size를 매개변수로 받은 size로 변경
     this->_capacity = size*2; // capacity를 받은 size 만큼 초기화
-    _memory = (T*)malloc(sizeof(T)*size); // 할당된 size만큼을 담을 수 있는 동적메모리 할당
+    _memory = (T*)malloc(sizeof(T)*_capacity); // 할당된 size만큼을 담을 수 있는 동적메모리 할당
     for(int i=0;i<size;++i){
       _memory[i] = element; // 반복문을 활용해서 동적메모리에 element를 size만큼 넣어준다.
     }
     // 메모리의 크기와 요소의 개수를 size 만큼 설정하고 메모리를 생성하고
     // 동적 메모리의 각 요소의 값은 element로 초기화하는 코드를 여기에 구현
+  }
+
+  ~Vector() {
+    free(_memory); // 할당된 _memory의 동적메모리 해지
+    // 동적 메모리 해제
   }
 
   unsigned size() const {
