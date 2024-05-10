@@ -6,7 +6,7 @@
 #include "String.h"
 
 
-  const unsigned String::npos = 0xffffffff; // static 변수인 npos 를 usigned int 중 가장 큰 '65535'로 초기화
+  const unsigned String::npos = 0xffffffff; // static 변수인 npos 를 usigned int 중 가장 큰 0xffffffff로 초기화(16진법 활용)
   // 생성자
   String::String(){
     this->capacity = 10; // 객체의 용량을 10으로 초기화
@@ -71,10 +71,10 @@
   String String::substr(unsigned position, unsigned length) const{
     String temp; // 반환할 String 객체 temp 선언
     temp.capacity = length+1; // temp의 용량을 length+1로 초기화
-    delete [] temp.memory;
+    delete [] temp.memory; // 위의 생성자로 생성된 temp의 동적 메모리를 해제
     temp.memory = new char[temp.capacity]; // temp를 length 만큼 동적 메모리할당
     strncpy(temp.memory,memory+position,length); // 원하는 위치인 position에서 부터의 복사를 위해 memory + position 이후 위에 선언된 temp 객체의 메모리에 length 만큼 copy
-    temp.memory[strlen(temp.memory)] = '\0';
+    temp.memory[strlen(temp.memory)] = '\0'; // 마지막 문자를 '\0'로 설정해준다.
     return temp; // temp 객체를 반환해준다
   }
   
@@ -137,13 +137,13 @@
       // 메모리 범위를 벗어나는 주소가 temp에 초기화 될 수 있으므로 조절해준 것입니다.
       strcpy(memory+position,temp); // memory+position 즉 지움을 당하는 주소 부터 temp를 복사 해줍니다. 이렇게 하면 문자열이 덮어 씌우지면서 지워지는 것과 같은 결과가 됩니다.
       
-      char* sup = new char[capacity];
+      char* sup = new char[capacity]; // 지워진 용량만큼 sup를 동적할당
       for(int i=0;i<capacity;++i){
-        sup[i] = '\0';
+        sup[i] = '\0'; // sup를 일단 빈 문자열로 만들어준다.
       }
-      strcpy(sup,memory);
-      delete [] memory;
-      memory = sup;   
+      strcpy(sup,memory); // sup에 수정된(삭제완료 된) memory의 문자열들을 넣어준다.
+      delete [] memory; // 기존 동적 메모리 memory를 삭제
+      memory = sup; // memory가 동적 메모리 sup를 가리키게 한다.
   }
   
   // memory에 저장된 문자열의 position 위치부터 길이가 length인 문자열을 str로 치환
