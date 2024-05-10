@@ -1,1 +1,3 @@
-Stirng.cpp의 find 함수 손보기
+1. vector.h 에서 동적메모리 해지 함수 추가
+2. vector.h 에서 size 매개변수로 받을 때 capacity 용량 설정 수정
+3. printf문 cout으로 바꾸기
