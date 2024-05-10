@@ -2,7 +2,7 @@
 
 using namespace std;
 
-#include "add.h"
+#include "Adder.h"
 
 Adder::Adder(int a,int b){
     op1 = a;

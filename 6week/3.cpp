@@ -9,8 +9,7 @@ public:
     MyVector(int n=5, int val=0);
     ~MyVector(){delete [] mem;}
     void show();
-
-
+    
 };
 
 MyVector::MyVector(int n,int val){
